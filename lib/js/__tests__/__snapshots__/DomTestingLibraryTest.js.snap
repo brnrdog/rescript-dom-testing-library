@@ -111,3 +111,11 @@ exports[`getByTitle 1`] = `
   title="title example"
 />
 `;
+
+exports[`waitFor 1`] = `
+<div
+  data-testid="test-id"
+>
+  Test ID
+</div>
+`;

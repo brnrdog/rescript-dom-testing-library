@@ -1,6 +1,6 @@
 open Jest
 open Expect
-open DomTestingLibrary__Queries
+open DomTestingLibrary
 
 let render = %raw(`
   function(html) {
@@ -135,5 +135,13 @@ testPromise("findByTestId", () => {
   "<div data-testid=\"test-id\">Test ID</div>"
   ->render
   ->findByTestId(~matcher=#Str("test-id"))
+  ->Promise.then_(matchSnapshot)
+})
+
+testPromise("waitFor", () => {
+  "<div data-testid=\"test-id\">Test ID</div>"
+  ->render
+  ->getByTestId(~matcher=#Str("test-id"))
+  ->waitFor
   ->Promise.then_(matchSnapshot)
 })
