@@ -8,7 +8,17 @@ let render = %raw(`
     body.innerHTML = html
     return body
   }
-  `)
+`)
+
+let renderWithDelay = %raw(`
+  function(html, delay) {
+    const body = document.querySelector('body')
+    setTimeout(() => {
+      body.innerHTML = html
+    }, delay)
+    return body
+  }
+`)
 
 let matchSnapshot = actual => {
   actual->expect->toMatchSnapshot->Js.Promise.resolve
@@ -139,9 +149,11 @@ testPromise("findByTestId", () => {
 })
 
 testPromise("waitFor", () => {
-  "<div data-testid=\"test-id\">Test ID</div>"
-  ->render
-  ->getByTestId(~matcher=#Str("test-id"))
-  ->waitFor
-  ->Promise.then_(matchSnapshot)
+  waitFor(() =>
+    "<div data-testid=\"test-id\">Test ID</div>"
+    ->renderWithDelay(200)
+    ->getByTestId(~matcher=#Str("test-id"))
+    ->expect
+    ->toMatchSnapshot
+  )
 })
