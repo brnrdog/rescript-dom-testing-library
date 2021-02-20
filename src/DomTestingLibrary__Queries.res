@@ -13,7 +13,7 @@ external getByRole: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-) => Js.Promise.t<'element> = "getByRole"
+) => 'element = "getByRole"
 let getByRole = (element, ~matcher) => getByRole(element, ~matcher)
 
 @module("@testing-library/dom")
@@ -25,7 +25,7 @@ external getByText: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-) => Js.Promise.t<'element> = "getByText"
+) => 'element = "getByText"
 let getByText = (element, ~matcher) => getByText(element, ~matcher)
 
 @module("@testing-library/dom")
@@ -37,7 +37,7 @@ external getByLabelText: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-) => Js.Promise.t<'element> = "getByLabelText"
+) => 'element = "getByLabelText"
 let getByLabelText = (element, ~matcher) => getByLabelText(element, ~matcher)
 
 @module("@testing-library/dom")
@@ -49,7 +49,7 @@ external getByPlaceholderText: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-) => Js.Promise.t<'element> = "getByPlaceholderText"
+) => 'element = "getByPlaceholderText"
 let getByPlaceholderText = (element, ~matcher) => getByPlaceholderText(element, ~matcher)
 
 @module("@testing-library/dom")
@@ -61,7 +61,7 @@ external getByDisplayValue: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-) => Js.Promise.t<'element> = "getByDisplayValue"
+) => 'element = "getByDisplayValue"
 let getByDisplayValue = (element, ~matcher) => getByDisplayValue(element, ~matcher)
 
 @module("@testing-library/dom")
@@ -73,7 +73,7 @@ external getByAltText: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-) => Js.Promise.t<'element> = "getByAltText"
+) => 'element = "getByAltText"
 let getByAltText = (element, ~matcher) => getByAltText(element, ~matcher)
 
 @module("@testing-library/dom")
@@ -85,7 +85,7 @@ external getByTitle: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-) => Js.Promise.t<'element> = "getByTitle"
+) => 'element = "getByTitle"
 let getByTitle = (element, ~matcher) => getByTitle(element, ~matcher)
 
 @module("@testing-library/dom")
@@ -97,7 +97,7 @@ external getByTestId: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-) => Js.Promise.t<'element> = "getByTestId"
+) => 'element = "getByTestId"
 let getByTestId = (element, ~matcher) => getByTestId(element, ~matcher)
 
 @module("@testing-library/dom")
