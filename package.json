@@ -1,12 +1,12 @@
 {
   "name": "rescript-dom-testing-library",
   "description": "ReScript bindings for @testing-library/dom",
-  "version": "0.1.0",
+  "version": "0.0.0-semantic-released",
   "scripts": {
     "clean": "bsb -clean-world",
     "build": "bsb -make-world",
     "watch": "bsb -make-world -w",
-    "test": "jest test -w"
+    "test": "jest test"
   },
   "keywords": [
     "BuckleScript"
@@ -15,7 +15,8 @@
   "license": "MIT",
   "devDependencies": {
     "@glennsl/bs-jest": "^0.6.0",
-    "bs-platform": "^9.0.1"
+    "bs-platform": "^9.0.1",
+    "semantic-release": "^17.3.9"
   },
   "dependencies": {
     "@testing-library/dom": "^7.29.4"
