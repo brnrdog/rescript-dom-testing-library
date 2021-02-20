@@ -9,7 +9,10 @@
     "test": "jest test"
   },
   "keywords": [
-    "BuckleScript"
+    "ReScript",
+    "BuckleScript",
+    "DOM",
+    "test"
   ],
   "author": "",
   "license": "MIT",
