@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`findByAltText 1`] = `
+<img
+  alt="alt text example"
+/>
+`;
+
+exports[`findByDisplayValue 1`] = `
+<input
+  placeholder="title"
+  type="text"
+  value="Red"
+/>
+`;
+
+exports[`findByLabel 1`] = `
+<input
+  id="title"
+  type="text"
+/>
+`;
+
+exports[`findByPlaceholderText 1`] = `
+<input
+  placeholder="title"
+  type="text"
+/>
+`;
+
+exports[`findByRole 1`] = `
+<option
+  role="option"
+>
+  Option
+</option>
+`;
+
+exports[`findByTestId 1`] = `
+<div
+  data-testid="test-id"
+>
+  Test ID
+</div>
+`;
+
+exports[`findByText 1`] = `
+<span>
+  Hello world
+</span>
+`;
+
+exports[`findByTitle 1`] = `
+<span
+  title="title example"
+/>
+`;
