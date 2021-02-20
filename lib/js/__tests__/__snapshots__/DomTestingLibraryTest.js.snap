@@ -55,3 +55,59 @@ exports[`findByTitle 1`] = `
   title="title example"
 />
 `;
+
+exports[`getByAltText 1`] = `
+<img
+  alt="alt text example"
+/>
+`;
+
+exports[`getByDisplayValue 1`] = `
+<input
+  placeholder="title"
+  type="text"
+  value="Red"
+/>
+`;
+
+exports[`getByLabel 1`] = `
+<input
+  id="title"
+  type="text"
+/>
+`;
+
+exports[`getByPlaceholderText 1`] = `
+<input
+  placeholder="title"
+  type="text"
+/>
+`;
+
+exports[`getByRole 1`] = `
+<option
+  role="option"
+>
+  Option
+</option>
+`;
+
+exports[`getByTestId 1`] = `
+<div
+  data-testid="test-id"
+>
+  Test ID
+</div>
+`;
+
+exports[`getByText 1`] = `
+<span>
+  Hello world
+</span>
+`;
+
+exports[`getByTitle 1`] = `
+<span
+  title="title example"
+/>
+`;

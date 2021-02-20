@@ -18,6 +18,70 @@ module Promise = {
   let then_ = (promise, fn) => Js.Promise.then_(fn, promise)
 }
 
+test("getByLabel", () => {
+  "<label for=\"title\">Title</label><input type=\"text\" id=\"title\" />"
+  ->render
+  ->getByLabelText(~matcher=#Str("Title"))
+  ->expect
+  ->toMatchSnapshot
+})
+
+test("getByText", () => {
+  "<span>Hello world</span>"
+  ->render
+  ->getByText(~matcher=#Str("Hello world"))
+  ->expect
+  ->toMatchSnapshot
+})
+
+test("getByRole", () => {
+  "<option role=\"option\">Option</option>"
+  ->render
+  ->getByRole(~matcher=#Str("option"))
+  ->expect
+  ->toMatchSnapshot
+})
+
+test("getByPlaceholderText", () => {
+  "<input type=\"text\" placeholder=\"title\" />"
+  ->render
+  ->getByPlaceholderText(~matcher=#Str("title"))
+  ->expect
+  ->toMatchSnapshot
+})
+
+test("getByDisplayValue", () => {
+  "<input type=\"text\" placeholder=\"title\" value=\"Red\" />"
+  ->render
+  ->getByDisplayValue(~matcher=#Str("Red"))
+  ->expect
+  ->toMatchSnapshot
+})
+
+test("getByAltText", () => {
+  "<img alt=\"alt text example\" />"
+  ->render
+  ->getByAltText(~matcher=#Str("alt text example"))
+  ->expect
+  ->toMatchSnapshot
+})
+
+test("getByTitle", () => {
+  "<span title=\"title example\" />"
+  ->render
+  ->getByTitle(~matcher=#Str("title example"))
+  ->expect
+  ->toMatchSnapshot
+})
+
+test("getByTestId", () => {
+  "<div data-testid=\"test-id\">Test ID</div>"
+  ->render
+  ->getByTestId(~matcher=#Str("test-id"))
+  ->expect
+  ->toMatchSnapshot
+})
+
 testPromise("findByLabel", () => {
   "<label for=\"title\">Title</label><input type=\"text\" id=\"title\" />"
   ->render
