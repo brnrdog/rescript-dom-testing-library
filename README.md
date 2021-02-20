@@ -16,6 +16,41 @@ npm install --save-dev rescript-dom-testing-library
 yarn add --dev rescript-dom-testing-library
 ```
 
+Update your bsconfig file:
+
+```json
+{
+  "bs-dev-dependencies": ["rescript-dom-testing-library"]
+}
+```
+
 ## Usage
 
-[Check the tests](https://github.com/brnrdog/rescript-dom-testing-library/blob/master/__tests__/DomTestingLibraryTest.res) to see examples.
+```res
+let render = %raw(`
+  function(html) {
+    const body = document.querySelector('body')
+    body.innerHTML = html
+    return body
+  }
+`)
+
+let example = `
+<label htmlFor="color">
+  Select a color
+  <select id="color">
+    <option>Red</option>
+    <option>Green</option>
+    <option>Blue</option>
+  </select>
+</label>
+`
+
+test("renders label", () => {
+  example
+  ->render
+  ->getByLabelText(~matcher=#RegExp(Js.Re.fromString("Select a color")))
+  ->expect
+  ->toMatchSnapshot
+})
+```
