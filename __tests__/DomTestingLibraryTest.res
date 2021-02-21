@@ -1,10 +1,10 @@
 open Jest
-open Expect
 open DomTestingLibrary
+open JestDom
 
 let render = %raw(`
   function(html) {
-    const body = document.createElement('body', document)
+    const body = document.querySelector('body', document)
     body.innerHTML = html
     return body
   }
@@ -20,10 +20,6 @@ let renderWithDelay = %raw(`
   }
 `)
 
-let matchSnapshot = actual => {
-  actual->expect->toMatchSnapshot->Js.Promise.resolve
-}
-
 module Promise = {
   let then_ = (promise, fn) => Js.Promise.then_(fn, promise)
 }
@@ -33,7 +29,7 @@ test("getByLabel", () => {
   ->render
   ->getByLabelText(~matcher=#Str("Title"))
   ->expect
-  ->toMatchSnapshot
+  ->toBeInTheDocument
 })
 
 test("getByText", () => {
@@ -41,7 +37,7 @@ test("getByText", () => {
   ->render
   ->getByText(~matcher=#Str("Hello world"))
   ->expect
-  ->toMatchSnapshot
+  ->toBeInTheDocument
 })
 
 test("getByRole", () => {
@@ -49,7 +45,7 @@ test("getByRole", () => {
   ->render
   ->getByRole(~matcher=#Str("option"))
   ->expect
-  ->toMatchSnapshot
+  ->toBeInTheDocument
 })
 
 test("getByPlaceholderText", () => {
@@ -57,7 +53,7 @@ test("getByPlaceholderText", () => {
   ->render
   ->getByPlaceholderText(~matcher=#Str("title"))
   ->expect
-  ->toMatchSnapshot
+  ->toBeInTheDocument
 })
 
 test("getByDisplayValue", () => {
@@ -65,7 +61,7 @@ test("getByDisplayValue", () => {
   ->render
   ->getByDisplayValue(~matcher=#Str("Red"))
   ->expect
-  ->toMatchSnapshot
+  ->toBeInTheDocument
 })
 
 test("getByAltText", () => {
@@ -73,7 +69,7 @@ test("getByAltText", () => {
   ->render
   ->getByAltText(~matcher=#Str("alt text example"))
   ->expect
-  ->toMatchSnapshot
+  ->toBeInTheDocument
 })
 
 test("getByTitle", () => {
@@ -81,7 +77,7 @@ test("getByTitle", () => {
   ->render
   ->getByTitle(~matcher=#Str("title example"))
   ->expect
-  ->toMatchSnapshot
+  ->toBeInTheDocument
 })
 
 test("getByTestId", () => {
@@ -89,63 +85,63 @@ test("getByTestId", () => {
   ->render
   ->getByTestId(~matcher=#Str("test-id"))
   ->expect
-  ->toMatchSnapshot
+  ->toBeInTheDocument
 })
 
 testPromise("findByLabel", () => {
   "<label for=\"title\">Title</label><input type=\"text\" id=\"title\" />"
   ->render
   ->findByLabelText(~matcher=#Str("Title"))
-  ->Promise.then_(matchSnapshot)
+  ->Promise.then_(actual => actual->expect->toBeInTheDocument->Js.Promise.resolve)
 })
 
 testPromise("findByText", () => {
   "<span>Hello world</span>"
   ->render
   ->findByText(~matcher=#Str("Hello world"))
-  ->Promise.then_(matchSnapshot)
+  ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
 })
 
 testPromise("findByRole", () => {
   "<option role=\"option\">Option</option>"
   ->render
   ->findByRole(~matcher=#Str("option"))
-  ->Promise.then_(matchSnapshot)
+  ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
 })
 
 testPromise("findByPlaceholderText", () => {
   "<input type=\"text\" placeholder=\"title\" />"
   ->render
   ->findByPlaceholderText(~matcher=#Str("title"))
-  ->Promise.then_(matchSnapshot)
+  ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
 })
 
 testPromise("findByDisplayValue", () => {
   "<input type=\"text\" placeholder=\"title\" value=\"Red\" />"
   ->render
   ->findByDisplayValue(~matcher=#Str("Red"))
-  ->Promise.then_(matchSnapshot)
+  ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
 })
 
 testPromise("findByAltText", () => {
   "<img alt=\"alt text example\" />"
   ->render
   ->findByAltText(~matcher=#Str("alt text example"))
-  ->Promise.then_(matchSnapshot)
+  ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
 })
 
 testPromise("findByTitle", () => {
   "<span title=\"title example\" />"
   ->render
   ->findByTitle(~matcher=#Str("title example"))
-  ->Promise.then_(matchSnapshot)
+  ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
 })
 
 testPromise("findByTestId", () => {
   "<div data-testid=\"test-id\">Test ID</div>"
   ->render
   ->findByTestId(~matcher=#Str("test-id"))
-  ->Promise.then_(matchSnapshot)
+  ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
 })
 
 testPromise("waitFor", () => {
@@ -154,6 +150,6 @@ testPromise("waitFor", () => {
     ->renderWithDelay(200)
     ->getByTestId(~matcher=#Str("test-id"))
     ->expect
-    ->toMatchSnapshot
+    ->toBeInTheDocument
   )
 })
