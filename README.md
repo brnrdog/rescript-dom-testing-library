@@ -27,6 +27,10 @@ Update your bsconfig file:
 ## Usage
 
 ```res
+open Jest
+open JestDom
+open DomTestingLibrary
+
 let render = %raw(`
   function(html) {
     const body = document.querySelector('body')
@@ -51,6 +55,8 @@ test("renders label", () => {
   ->render
   ->getByLabelText(~matcher=#RegExp(Js.Re.fromString("Select a color")))
   ->expect
-  ->toMatchSnapshot
+  ->toBeInTheDocument
 })
 ```
+
+[See the tests](https://github.com/brnrdog/rescript-dom-testing-library/blob/master/__tests__/DomTestingLibraryTest.res) for more examples.
