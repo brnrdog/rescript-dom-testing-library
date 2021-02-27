@@ -39,7 +39,7 @@ let render = %raw(`
   }
 `)
 
-let example = `
+let example = render(`
 <label htmlFor="color">
   Select a color
   <select id="color">
@@ -48,12 +48,32 @@ let example = `
     <option>Blue</option>
   </select>
 </label>
-`
+`)
 
 test("renders label", () => {
   example
-  ->render
   ->getByLabelText(~matcher=#RegExp(Js.Re.fromString("Select a color")))
+  ->expect
+  ->toBeInTheDocument
+})
+
+test("renders red option", () => {
+  example
+  ->getByRole(~matcher=#Str("option"), option=#Str("Red"))
+  ->expect
+  ->toBeInTheDocument
+})
+
+test("renders red option", () => {
+  example
+  ->getByRole(~matcher=#Str("option"), option=#Str("Green"))
+  ->expect
+  ->toBeInTheDocument
+})
+
+test("renders red option", () => {
+  example
+  ->getByRole(~matcher=#Str("option"), option=#Str("Blue"))
   ->expect
   ->toBeInTheDocument
 })
