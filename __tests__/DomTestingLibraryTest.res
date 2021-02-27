@@ -41,9 +41,9 @@ test("getByText", () => {
 })
 
 test("getByRole", () => {
-  "<option role=\"option\">Option</option>"
+  "<option role=\"option\">Color Green</option>"
   ->render
-  ->getByRole(~matcher=#Str("option"))
+  ->getByRole(~matcher=#Str("option"), ~options=makeRoleOptions(~name=#Str("Color Green"), ()))
   ->expect
   ->toBeInTheDocument
 })

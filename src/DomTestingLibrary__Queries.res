@@ -3,6 +3,19 @@ external screen: 'document = "screen"
 let screen = screen
 
 type textMatcher = (string, Dom.element) => bool
+type textMatch = [
+  | #Func(textMatcher)
+  | #RegExp(Js.Re.t)
+  | #Str(string)
+]
+
+@unboxed
+type roleOptions = {name: textMatch}
+let makeRoleOptions = (~name, ()) => {
+  {
+    name: name,
+  }
+}
 
 @module("@testing-library/dom")
 external getByRole: (
@@ -13,8 +26,9 @@ external getByRole: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
+  ~options: option<roleOptions>,
 ) => 'element = "getByRole"
-let getByRole = (element, ~matcher) => getByRole(element, ~matcher)
+let getByRole = (~options=?, ~matcher, element) => getByRole(element, ~matcher, ~options)
 
 @module("@testing-library/dom")
 external getByText: (
@@ -109,8 +123,9 @@ external findByRole: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
+  ~options: option<roleOptions>,
 ) => Js.Promise.t<'element> = "findByRole"
-let findByRole = (element, ~matcher) => findByRole(element, ~matcher)
+let findByRole = (~options=?, ~matcher, element) => findByRole(element, ~matcher, ~options)
 
 @module("@testing-library/dom")
 external findByText: (
