@@ -43,7 +43,7 @@ test("getByText", () => {
 test("getByRole", () => {
   "<option role=\"option\">Color Green</option>"
   ->render
-  ->getByRole(~matcher=#Str("option"), ~options=makeRoleOptions(~name=#Str("Color Green"), ()))
+  ->getByRole(~matcher=#Str("option"), ~options=makeRoleOptions(~name=#Str("Color Green"))
   ->expect
   ->toBeInTheDocument
 })
@@ -103,9 +103,9 @@ testPromise("findByText", () => {
 })
 
 testPromise("findByRole", () => {
-  "<option role=\"option\">Option</option>"
+  "<option role=\"option\">Red Color</option>"
   ->render
-  ->findByRole(~matcher=#Str("option"))
+  ->findByRole(~matcher=#Str("option"), ~options=makeRoleOptions(~name=#Str("Red Color")))
   ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
 })
 
