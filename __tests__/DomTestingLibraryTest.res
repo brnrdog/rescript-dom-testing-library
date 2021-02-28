@@ -84,6 +84,17 @@ test("getByPlaceholderText", () => {
   ->toBeInTheDocument
 })
 
+test("getByPlaceholderText (with exact as false)", () => {
+  "<input type=\"text\" placeholder=\"Title\" />"
+  ->render
+  ->getByPlaceholderText(
+    ~matcher=#Str("title"),
+    ~options=makeByPlaceholderTextOptions(~exact=false, ()),
+  )
+  ->expect
+  ->toBeInTheDocument
+})
+
 test("getByDisplayValue", () => {
   "<input type=\"text\" placeholder=\"title\" value=\"Red\" />"
   ->render

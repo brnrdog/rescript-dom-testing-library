@@ -1,23 +1,12 @@
-include DomTestingLibrary__Queries__ByText
-include DomTestingLibrary__Queries__ByRole
-include DomTestingLibrary__Queries__Options
 include DomTestingLibrary__Queries__ByLabelText
+include DomTestingLibrary__Queries__ByPlaceholderText
+include DomTestingLibrary__Queries__ByRole
+include DomTestingLibrary__Queries__ByText
+include DomTestingLibrary__Queries__Options
 
 @module("@testing-library/dom")
 external screen: 'document = "screen"
 let screen = screen
-
-@module("@testing-library/dom")
-external getByPlaceholderText: (
-  'element,
-  ~matcher: @unwrap
-  [
-    | #Func(textMatcher)
-    | #RegExp(Js.Re.t)
-    | #Str(string)
-  ],
-) => 'element = "getByPlaceholderText"
-let getByPlaceholderText = (element, ~matcher) => getByPlaceholderText(element, ~matcher)
 
 @module("@testing-library/dom")
 external getByDisplayValue: (
@@ -66,18 +55,6 @@ external getByTestId: (
   ],
 ) => 'element = "getByTestId"
 let getByTestId = (element, ~matcher) => getByTestId(element, ~matcher)
-
-@module("@testing-library/dom")
-external findByPlaceholderText: (
-  'element,
-  ~matcher: @unwrap
-  [
-    | #Func(textMatcher)
-    | #RegExp(Js.Re.t)
-    | #Str(string)
-  ],
-) => Js.Promise.t<'element> = "findByPlaceholderText"
-let findByPlaceholderText = (element, ~matcher) => findByPlaceholderText(element, ~matcher)
 
 @module("@testing-library/dom")
 external findByDisplayValue: (
