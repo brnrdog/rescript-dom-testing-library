@@ -116,7 +116,10 @@ test("queryAllByRole", () => {
 })
 
 test("getByRole using regex", () => {
-  let options = makeOptionsWithRegex(~name=Js.Re.fromStringWithFlags("color green", ~flags="i"), ())
+  let options = makeByRoleOptionsWithRegex(
+    ~name=Js.Re.fromStringWithFlags("color green", ~flags="i"),
+    (),
+  )
 
   "<option role=\"option\">Color Green</option>"
   ->render
@@ -126,7 +129,10 @@ test("getByRole using regex", () => {
 })
 
 test("getByRole using function", () => {
-  let options = makeOptionsWithFunction(~name=(content, _element) => content === "Color Green", ())
+  let options = makeByRoleOptionsWithFunction(
+    ~name=(content, _element) => content === "Color Green",
+    (),
+  )
 
   "<option role=\"option\">Color Green</option>"
   ->render
