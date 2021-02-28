@@ -15,7 +15,7 @@
     "DOM",
     "test"
   ],
-  "author": "",
+  "author": "Bernardo Gurgel <brnrdog@hey.com>",
   "license": "MIT",
   "devDependencies": {
     "@glennsl/bs-jest": "^0.6.0",
