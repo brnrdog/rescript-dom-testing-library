@@ -32,6 +32,14 @@ test("getByLabel", () => {
   ->toBeInTheDocument
 })
 
+test("getByLabel (with exact as false)", () => {
+  "<label for=\"title\">Title</label><input type=\"text\" id=\"title\" />"
+  ->render
+  ->getByLabelText(~matcher=#Str("title"), ~options=makeByLabelTextOptions(~exact=false, ()))
+  ->expect
+  ->toBeInTheDocument
+})
+
 test("getByText", () => {
   "<span>Hello world</span>"
   ->render
