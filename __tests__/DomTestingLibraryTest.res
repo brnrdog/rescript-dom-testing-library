@@ -127,6 +127,14 @@ test("getByTitle", () => {
   ->toBeInTheDocument
 })
 
+test("getByTitle (with exact as false)", () => {
+  "<span title=\"title example\" />"
+  ->render
+  ->getByTitle(~matcher=#Str("TITLE EXAMPLE"), ~options=makeByTitleOptions(~exact=false, ()))
+  ->expect
+  ->toBeInTheDocument
+})
+
 test("getByTestId", () => {
   "<div data-testid=\"test-id\">Test ID</div>"
   ->render

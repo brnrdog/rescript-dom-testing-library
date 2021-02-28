@@ -3,6 +3,7 @@ include DomTestingLibrary__Queries__ByLabelText
 include DomTestingLibrary__Queries__ByPlaceholderText
 include DomTestingLibrary__Queries__ByRole
 include DomTestingLibrary__Queries__ByText
+include DomTestingLibrary__Queries__ByTitle
 include DomTestingLibrary__Queries__Options
 
 @module("@testing-library/dom")
@@ -20,18 +21,6 @@ external getByAltText: (
   ],
 ) => 'element = "getByAltText"
 let getByAltText = (element, ~matcher) => getByAltText(element, ~matcher)
-
-@module("@testing-library/dom")
-external getByTitle: (
-  'element,
-  ~matcher: @unwrap
-  [
-    | #Func(textMatcher)
-    | #RegExp(Js.Re.t)
-    | #Str(string)
-  ],
-) => 'element = "getByTitle"
-let getByTitle = (element, ~matcher) => getByTitle(element, ~matcher)
 
 @module("@testing-library/dom")
 external getByTestId: (
@@ -56,18 +45,6 @@ external findByAltText: (
   ],
 ) => Js.Promise.t<'element> = "findByAltText"
 let findByAltText = (element, ~matcher) => findByAltText(element, ~matcher)
-
-@module("@testing-library/dom")
-external findByTitle: (
-  'element,
-  ~matcher: @unwrap
-  [
-    | #Func(textMatcher)
-    | #RegExp(Js.Re.t)
-    | #Str(string)
-  ],
-) => Js.Promise.t<'element> = "findByTitle"
-let findByTitle = (element, ~matcher) => findByTitle(element, ~matcher)
 
 @module("@testing-library/dom")
 external findByTestId: (
