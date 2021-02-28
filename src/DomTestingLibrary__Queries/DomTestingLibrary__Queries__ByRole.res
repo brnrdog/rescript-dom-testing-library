@@ -32,7 +32,7 @@ let makeByRoleOptions = (~exact=?, ~selector=?, ~name=?, ()): byRoleOptions => {
   })
 }
 
-let makeOptionsWithRegex = (~exact=?, ~selector=?, ~name=?, ()): byRoleOptions => {
+let makeByRoleOptionsWithRegex = (~exact=?, ~selector=?, ~name=?, ()): byRoleOptions => {
   #WithRegExp({
     selector: Js.Undefined.fromOption(selector),
     exact: Js.Undefined.fromOption(exact),
@@ -40,7 +40,7 @@ let makeOptionsWithRegex = (~exact=?, ~selector=?, ~name=?, ()): byRoleOptions =
   })
 }
 
-let makeOptionsWithFunction = (~exact=?, ~selector=?, ~name=?, ()): byRoleOptions => {
+let makeByRoleOptionsWithFunction = (~exact=?, ~selector=?, ~name=?, ()): byRoleOptions => {
   #WithFunction({
     selector: Js.Undefined.fromOption(selector),
     exact: Js.Undefined.fromOption(exact),
