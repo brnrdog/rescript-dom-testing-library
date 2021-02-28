@@ -18,13 +18,13 @@ type optionsWithFunction = {
   exact: Js.undefined<bool>,
 }
 
-type options = [
+type byRoleOptions = [
   | #WithString(optionsWithString)
   | #WithRegExp(optionsWithRegExp)
   | #WithFunction(optionsWithFunction)
 ]
 
-let makeOptions = (~exact=?, ~selector=?, ~name=?, ()): options => {
+let makeByRoleOptions = (~exact=?, ~selector=?, ~name=?, ()): byRoleOptions => {
   #WithString({
     selector: Js.Undefined.fromOption(selector),
     exact: Js.Undefined.fromOption(exact),
@@ -32,7 +32,7 @@ let makeOptions = (~exact=?, ~selector=?, ~name=?, ()): options => {
   })
 }
 
-let makeOptionsWithRegex = (~exact=?, ~selector=?, ~name=?, ()): options => {
+let makeOptionsWithRegex = (~exact=?, ~selector=?, ~name=?, ()): byRoleOptions => {
   #WithRegExp({
     selector: Js.Undefined.fromOption(selector),
     exact: Js.Undefined.fromOption(exact),
@@ -40,7 +40,7 @@ let makeOptionsWithRegex = (~exact=?, ~selector=?, ~name=?, ()): options => {
   })
 }
 
-let makeOptionsWithFunction = (~exact=?, ~selector=?, ~name=?, ()): options => {
+let makeOptionsWithFunction = (~exact=?, ~selector=?, ~name=?, ()): byRoleOptions => {
   #WithFunction({
     selector: Js.Undefined.fromOption(selector),
     exact: Js.Undefined.fromOption(exact),
@@ -77,7 +77,7 @@ external findByRole: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-  ~options: option<options>,
+  ~options: option<byRoleOptions>,
 ) => Js.Promise.t<'element> = "findByRole"
 let findByRole = (~options=?, ~matcher, element) => findByRole(element, ~matcher, ~options)
 
@@ -90,7 +90,7 @@ external getAllByRole: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-  ~options: option<options>,
+  ~options: option<byRoleOptions>,
 ) => array<'element> = "getAllByRole"
 let getAllByRole = (~options=?, ~matcher, element) => getAllByRole(element, ~matcher, ~options)
 
@@ -103,7 +103,7 @@ external queryAllByRole: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-  ~options: option<options>,
+  ~options: option<byRoleOptions>,
 ) => array<'element> = "queryAllByRole"
 let queryAllByRole = (~options=?, ~matcher, element) => queryAllByRole(element, ~matcher, ~options)
 
@@ -116,6 +116,6 @@ external findAllByRole: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-  ~options: option<options>,
+  ~options: option<byRoleOptions>,
 ) => Js.Promise.t<array<'element>> = "findAllByRole"
 let findAllByRole = (~options=?, ~matcher, element) => findAllByRole(element, ~matcher, ~options)

@@ -233,7 +233,7 @@ testPromise("findByText", () => {
 })
 
 testPromise("findByRole", () => {
-  let options = makeOptions(~name="Red Color", ())
+  let options = makeByRoleOptions(~name="Red Color", ())
   "<option role=\"option\">Red Color</option>"
   ->render
   ->findByRole(~matcher=#Str("option"), ~options)
