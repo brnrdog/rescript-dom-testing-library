@@ -1,6 +1,6 @@
 open Jest
 open DomTestingLibrary
-include JestDom
+open JestDom
 
 let render = %raw(`
   function(html) {
