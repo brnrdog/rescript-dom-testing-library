@@ -1,3 +1,4 @@
+include DomTestingLibrary__Queries__ByDisplayValue
 include DomTestingLibrary__Queries__ByLabelText
 include DomTestingLibrary__Queries__ByPlaceholderText
 include DomTestingLibrary__Queries__ByRole
@@ -7,18 +8,6 @@ include DomTestingLibrary__Queries__Options
 @module("@testing-library/dom")
 external screen: 'document = "screen"
 let screen = screen
-
-@module("@testing-library/dom")
-external getByDisplayValue: (
-  'element,
-  ~matcher: @unwrap
-  [
-    | #Func(textMatcher)
-    | #RegExp(Js.Re.t)
-    | #Str(string)
-  ],
-) => 'element = "getByDisplayValue"
-let getByDisplayValue = (element, ~matcher) => getByDisplayValue(element, ~matcher)
 
 @module("@testing-library/dom")
 external getByAltText: (
@@ -55,18 +44,6 @@ external getByTestId: (
   ],
 ) => 'element = "getByTestId"
 let getByTestId = (element, ~matcher) => getByTestId(element, ~matcher)
-
-@module("@testing-library/dom")
-external findByDisplayValue: (
-  'element,
-  ~matcher: @unwrap
-  [
-    | #Func(textMatcher)
-    | #RegExp(Js.Re.t)
-    | #Str(string)
-  ],
-) => Js.Promise.t<'element> = "findByDisplayValue"
-let findByDisplayValue = (element, ~matcher) => findByDisplayValue(element, ~matcher)
 
 @module("@testing-library/dom")
 external findByAltText: (

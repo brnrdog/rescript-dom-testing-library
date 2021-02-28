@@ -103,6 +103,14 @@ test("getByDisplayValue", () => {
   ->toBeInTheDocument
 })
 
+test("getByDisplayValue (with exact as false)", () => {
+  "<input type=\"text\" placeholder=\"title\" value=\"Red\" />"
+  ->render
+  ->getByDisplayValue(~matcher=#Str("red"), ~options=makeByDisplayValueOptions(~exact=false, ()))
+  ->expect
+  ->toBeInTheDocument
+})
+
 test("getByAltText", () => {
   "<img alt=\"alt text example\" />"
   ->render
