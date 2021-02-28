@@ -6,7 +6,8 @@
     "clean": "bsb -clean-world",
     "build": "bsb -make-world",
     "watch": "bsb -make-world -w",
-    "test": "jest test"
+    "test": "jest test",
+    "commit": "cz"
   },
   "keywords": [
     "ReScript",
@@ -23,6 +24,7 @@
     "semantic-release": "^17.3.9"
   },
   "dependencies": {
-    "@testing-library/dom": "^7.29.4"
+    "@testing-library/dom": "^7.29.4",
+    "commitizen": "^4.2.3"
   }
 }
