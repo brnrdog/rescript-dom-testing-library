@@ -119,6 +119,14 @@ test("getByAltText", () => {
   ->toBeInTheDocument
 })
 
+test("getByAltText (with exact as false)", () => {
+  "<img alt=\"alt text example\" />"
+  ->render
+  ->getByAltText(~matcher=#Str("alt text example"), ~options=makeByAltTextOptions(~exact=false, ()))
+  ->expect
+  ->toBeInTheDocument
+})
+
 test("getByTitle", () => {
   "<span title=\"title example\" />"
   ->render
