@@ -40,10 +40,12 @@ test("getByText", () => {
   ->toBeInTheDocument
 })
 
-test("getByRole", () => {
+Only.test("getByRole", () => {
+  let options = makeOptionsWithRegex(~name=Js.Re.fromStringWithFlags("color green", ~flags="i"), ())
+
   "<option role=\"option\">Color Green</option>"
   ->render
-  ->getByRole(~matcher=#Str("option"), ~options=makeRoleOptions(~name=#Str("Color Green"))
+  ->getByRole(~matcher=#Str("option"), ~options)
   ->expect
   ->toBeInTheDocument
 })
@@ -103,9 +105,10 @@ testPromise("findByText", () => {
 })
 
 testPromise("findByRole", () => {
+  // let options = RoleQuery.makeOptions(~name=#Str("Red Color"))
   "<option role=\"option\">Red Color</option>"
   ->render
-  ->findByRole(~matcher=#Str("option"), ~options=makeRoleOptions(~name=#Str("Red Color")))
+  ->findByRole(~matcher=#Str("option"))
   ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
 })
 
