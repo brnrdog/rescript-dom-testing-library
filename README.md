@@ -52,7 +52,7 @@ let example = render(`
 
 test("renders label", () => {
   example
-  ->getByLabelText(~matcher=#RegExp(Js.Re.fromString("select a color"))
+  ->getByLabelText(~matcher=#RegExp(Js.Re.fromString("select a color")))
   ->expect
   ->toBeInTheDocument
 })
@@ -60,28 +60,22 @@ test("renders label", () => {
 test("renders red option (using string)", () => {
   let options = makeByRoleOptions(~name="Red", ())
 
-  example
-  ->getByRole(~matcher=#Str("option"), ~options)
-  ->expect
-  ->toBeInTheDocument
+  example->getByRole(~matcher=#Str("option"), ~options)->expect->toBeInTheDocument
 })
 
 test("renders red option (using regular expression)", () => {
-  let options = makeOptionsWithRegExp(~name=Js.Re.fromStringWithFlags("/green/", ~flags="i"), ())
+  let options = makeByRoleOptionsWithRegex(
+    ~name=Js.Re.fromStringWithFlags("/green/", ~flags="i"),
+    (),
+  )
 
-  example
-  ->getByRole(~matcher=#Str("option"), ~options)
-  ->expect
-  ->toBeInTheDocument
+  example->getByRole(~matcher=#Str("option"), ~options)->expect->toBeInTheDocument
 })
 
 test("renders blue option (using custom function)", () => {
   let options = makeByRoleOptionsWithFunction(~name=(content, _element) => content === "Blue", ())
 
-  example
-  ->getByRole(~matcher=#Str("option"),~options)
-  ->expect
-  ->toBeInTheDocument
+  example->getByRole(~matcher=#Str("option"), ~options)->expect->toBeInTheDocument
 })
 ```
 
