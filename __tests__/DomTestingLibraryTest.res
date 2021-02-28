@@ -1,6 +1,6 @@
 open Jest
 open DomTestingLibrary
-open JestDom
+include JestDom
 
 let render = %raw(`
   function(html) {
@@ -54,6 +54,30 @@ test("getByText (with exact as false)", () => {
   ->getByText(~matcher=#Str("hello world"), ~options=makeByTextOptions(~exact=false, ()))
   ->expect
   ->toBeInTheDocument
+})
+
+test("getAllByRole", () => {
+  "<select>
+    <option role=\"option\">Color Red</option>
+    <option role=\"option\">Color Green</option>
+    <option role=\"option\">Color Blue</option>
+  </select>"
+  ->render
+  ->getAllByRole(~matcher=#Str("option"))
+  |> Expect.expect
+  |> Expect.toHaveLength(3)
+})
+
+test("queryAllByRole", () => {
+  "<select>
+    <option role=\"option\">Color Red</option>
+    <option role=\"option\">Color Green</option>
+    <option role=\"option\">Color Blue</option>
+  </select>"
+  ->render
+  ->queryAllByRole(~matcher=#Str("option"))
+  |> Expect.expect //bs-jest is pipe-last
+  |> Expect.toHaveLength(3)
 })
 
 test("getByRole using regex", () => {
@@ -179,6 +203,17 @@ testPromise("findByRole", () => {
   ->render
   ->findByRole(~matcher=#Str("option"), ~options)
   ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
+})
+
+testPromise("findAllByRole", () => {
+  "<select>
+    <option role=\"option\">Color Red</option>
+    <option role=\"option\">Color Green</option>
+    <option role=\"option\">Color Blue</option>
+  </select>"
+  ->render
+  ->findAllByRole(~matcher=#Str("option"))
+  ->Promise.then_(el => el |> Expect.expect |> Expect.toHaveLength(3) |> Js_promise.resolve)
 })
 
 testPromise("findByPlaceholderText", () => {
