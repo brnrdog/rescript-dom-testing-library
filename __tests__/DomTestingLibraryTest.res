@@ -151,6 +151,14 @@ test("getByTestId", () => {
   ->toBeInTheDocument
 })
 
+test("getByTestId (with exact as false)", () => {
+  "<div data-testid=\"TEST-ID\">Test ID</div>"
+  ->render
+  ->getByTestId(~matcher=#Str("test-id"), ~options=makeByTestIdOptions(~exact=false, ()))
+  ->expect
+  ->toBeInTheDocument
+})
+
 testPromise("findByLabel", () => {
   "<label for=\"title\">Title</label><input type=\"text\" id=\"title\" />"
   ->render
