@@ -56,6 +56,41 @@ test("getByText (with exact as false)", () => {
   ->toBeInTheDocument
 })
 
+test("getAllByText", () => {
+  "<select>
+    <option role=\"option\">Color Red</option>
+    <option role=\"option\">Color Green</option>
+    <option role=\"option\">Color Blue</option>
+  </select>"
+  ->render
+  ->getAllByText(~matcher=#RegExp(Js.Re.fromString("Color")))
+  |> Expect.expect
+  |> Expect.toHaveLength(3)
+})
+
+test("getAllByText", () => {
+  "<select>
+    <option role=\"option\">Color Red</option>
+    <option role=\"option\">Color Green</option>
+    <option role=\"option\">Color Blue</option>
+  </select>"
+  ->render
+  ->queryAllByText(~matcher=#RegExp(Js.Re.fromString("Color")))
+  |> Expect.expect
+  |> Expect.toHaveLength(3)
+})
+
+testPromise("findAllByText", () => {
+  "<select>
+    <option role=\"option\">Color Red</option>
+    <option role=\"option\">Color Green</option>
+    <option role=\"option\">Color Blue</option>
+  </select>"
+  ->render
+  ->findAllByText(~matcher=#RegExp(Js.Re.fromString("Color")))
+  ->Promise.then_(el => el |> Expect.expect |> Expect.toHaveLength(3) |> Js_promise.resolve)
+})
+
 test("getAllByRole", () => {
   "<select>
     <option role=\"option\">Color Red</option>
