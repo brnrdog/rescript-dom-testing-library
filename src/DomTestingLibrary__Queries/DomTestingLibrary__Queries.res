@@ -1,34 +1,8 @@
+include DomTestingLibrary__Queries__ByRole
+
 @module("@testing-library/dom")
 external screen: 'document = "screen"
 let screen = screen
-
-type textMatcher = (string, Dom.element) => bool
-type textMatch = [
-  | #Func(textMatcher)
-  | #RegExp(Js.Re.t)
-  | #Str(string)
-]
-
-@unboxed
-type roleOptions = {name: textMatch}
-let makeRoleOptions = (~name, ()) => {
-  {
-    name: name,
-  }
-}
-
-@module("@testing-library/dom")
-external getByRole: (
-  'element,
-  ~matcher: @unwrap
-  [
-    | #Func(textMatcher)
-    | #RegExp(Js.Re.t)
-    | #Str(string)
-  ],
-  ~options: option<roleOptions>,
-) => 'element = "getByRole"
-let getByRole = (~options=?, ~matcher, element) => getByRole(element, ~matcher, ~options)
 
 @module("@testing-library/dom")
 external getByText: (
@@ -113,19 +87,6 @@ external getByTestId: (
   ],
 ) => 'element = "getByTestId"
 let getByTestId = (element, ~matcher) => getByTestId(element, ~matcher)
-
-@module("@testing-library/dom")
-external findByRole: (
-  'element,
-  ~matcher: @unwrap
-  [
-    | #Func(textMatcher)
-    | #RegExp(Js.Re.t)
-    | #Str(string)
-  ],
-  ~options: option<roleOptions>,
-) => Js.Promise.t<'element> = "findByRole"
-let findByRole = (~options=?, ~matcher, element) => findByRole(element, ~matcher, ~options)
 
 @module("@testing-library/dom")
 external findByText: (

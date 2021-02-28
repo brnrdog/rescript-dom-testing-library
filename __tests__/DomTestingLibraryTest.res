@@ -40,10 +40,22 @@ test("getByText", () => {
   ->toBeInTheDocument
 })
 
-test("getByRole", () => {
+test("getByRole using regex", () => {
+  let options = makeOptionsWithRegex(~name=Js.Re.fromStringWithFlags("color green", ~flags="i"), ())
+
   "<option role=\"option\">Color Green</option>"
   ->render
-  ->getByRole(~matcher=#Str("option"), ~options=makeRoleOptions(~name=#Str("Color Green"))
+  ->getByRole(~matcher=#Str("option"), ~options)
+  ->expect
+  ->toBeInTheDocument
+})
+
+test("getByRole using function", () => {
+  let options = makeOptionsWithFunction(~name=(content, _element) => content === "Color Green", ())
+
+  "<option role=\"option\">Color Green</option>"
+  ->render
+  ->getByRole(~matcher=#Str("option"), ~options)
   ->expect
   ->toBeInTheDocument
 })
@@ -103,9 +115,10 @@ testPromise("findByText", () => {
 })
 
 testPromise("findByRole", () => {
+  let options = makeOptions(~name="Red Color", ())
   "<option role=\"option\">Red Color</option>"
   ->render
-  ->findByRole(~matcher=#Str("option"), ~options=makeRoleOptions(~name=#Str("Red Color")))
+  ->findByRole(~matcher=#Str("option"), ~options)
   ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
 })
 

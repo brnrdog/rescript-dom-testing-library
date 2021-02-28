@@ -57,23 +57,29 @@ test("renders label", () => {
   ->toBeInTheDocument
 })
 
-test("renders red option", () => {
+test("renders red option (using string)", () => {
   example
-  ->getByRole(~matcher=#Str("option"), option=#Str("Red"))
+  ->getByRole(~matcher=#Str("option"), ~options=makeOptions(~name="Red"), ())
   ->expect
   ->toBeInTheDocument
 })
 
-test("renders red option", () => {
+test("renders red option (using regular expression)", () => {
   example
-  ->getByRole(~matcher=#Str("option"), option=#Str("Green"))
+  ->getByRole(
+    ~matcher=#Str("option"),
+    ~options=makeOptionsWithRegExp(~name=Js.Re.fromStringWithFlags("/green/", ~flags="i")),())
   ->expect
   ->toBeInTheDocument
 })
 
-test("renders red option", () => {
+test("renders blue option (using custom function)", () => {
   example
-  ->getByRole(~matcher=#Str("option"), option=#Str("Blue"))
+  ->getByRole(
+    ~matcher=#Str("option"),
+    ~options=makeOptionsWithFunction(~name=(content, _element) => content === "Blue", ()),
+    ()
+  )
   ->expect
   ->toBeInTheDocument
 })
