@@ -1,4 +1,4 @@
-include DomTestingLibrary__Queries__Options
+open DomTestingLibrary__Queries__Options
 
 @module("@testing-library/dom")
 external getByRole: (

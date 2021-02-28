@@ -1,20 +1,10 @@
+include DomTestingLibrary__Queries__ByText
 include DomTestingLibrary__Queries__ByRole
+include DomTestingLibrary__Queries__Options
 
 @module("@testing-library/dom")
 external screen: 'document = "screen"
 let screen = screen
-
-@module("@testing-library/dom")
-external getByText: (
-  'element,
-  ~matcher: @unwrap
-  [
-    | #Func(textMatcher)
-    | #RegExp(Js.Re.t)
-    | #Str(string)
-  ],
-) => 'element = "getByText"
-let getByText = (element, ~matcher) => getByText(element, ~matcher)
 
 @module("@testing-library/dom")
 external getByLabelText: (
@@ -87,18 +77,6 @@ external getByTestId: (
   ],
 ) => 'element = "getByTestId"
 let getByTestId = (element, ~matcher) => getByTestId(element, ~matcher)
-
-@module("@testing-library/dom")
-external findByText: (
-  'element,
-  ~matcher: @unwrap
-  [
-    | #Func(textMatcher)
-    | #RegExp(Js.Re.t)
-    | #Str(string)
-  ],
-) => Js.Promise.t<'element> = "findByText"
-let findByText = (element, ~matcher) => findByText(element, ~matcher)
 
 @module("@testing-library/dom")
 external findByLabelText: (

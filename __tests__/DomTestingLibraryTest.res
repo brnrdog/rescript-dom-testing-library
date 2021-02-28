@@ -40,6 +40,14 @@ test("getByText", () => {
   ->toBeInTheDocument
 })
 
+test("getByText (with exact as false)", () => {
+  "<span>Hello world</span>"
+  ->render
+  ->getByText(~matcher=#Str("hello world"), ~options=makeByTextOptions(~exact=false, ()))
+  ->expect
+  ->toBeInTheDocument
+})
+
 test("getByRole using regex", () => {
   let options = makeOptionsWithRegex(~name=Js.Re.fromStringWithFlags("color green", ~flags="i"), ())
 
