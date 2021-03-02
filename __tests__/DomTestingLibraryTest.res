@@ -200,6 +200,25 @@ test("getByTitle", () => {
   ->toBeInTheDocument
 })
 
+test("getAllByTitle", () => {
+  "<span title=\"title example\" />"->render->getAllByTitle(~matcher=#Str("title example"))
+  |> Expect.expect
+  |> Expect.toHaveLength(1)
+})
+
+test("queryAllByTitle", () => {
+  "<span title=\"title example\" />"->render->queryAllByTitle(~matcher=#Str("title example"))
+  |> Expect.expect
+  |> Expect.toHaveLength(1)
+})
+
+testPromise("findAllByTitle", () => {
+  "<span title=\"title example\" />"
+  ->render
+  ->findAllByTitle(~matcher=#Str("title example"))
+  ->Promise.then_(el => el |> Expect.expect |> Expect.toHaveLength(1) |> Js_promise.resolve)
+})
+
 test("getByTitle (with exact as false)", () => {
   "<span title=\"title example\" />"
   ->render
