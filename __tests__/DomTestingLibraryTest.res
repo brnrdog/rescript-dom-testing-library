@@ -192,6 +192,25 @@ test("getByAltText (with exact as false)", () => {
   ->toBeInTheDocument
 })
 
+test("getAllByAltText", () => {
+  "<img alt=\"alt text example\" />"->render->getAllByAltText(~matcher=#Str("alt text example"))
+  |> Expect.expect
+  |> Expect.toHaveLength(1)
+})
+
+test("queryAllByAltText", () => {
+  "<img alt=\"alt text example\" />"->render->queryAllByAltText(~matcher=#Str("alt text example"))
+  |> Expect.expect
+  |> Expect.toHaveLength(1)
+})
+
+testPromise("findAllByAltText", () => {
+  "<img alt=\"alt text example\" />"
+  ->render
+  ->findAllByAltText(~matcher=#Str("alt text example"))
+  ->Promise.then_(el => el |> Expect.expect |> Expect.toHaveLength(1) |> Js_promise.resolve)
+})
+
 test("getByTitle", () => {
   "<span title=\"title example\" />"
   ->render
