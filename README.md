@@ -60,7 +60,10 @@ test("renders label", () => {
 test("renders red option (using string)", () => {
   let options = makeByRoleOptions(~name="Red", ())
 
-  example->getByRole(~matcher=#Str("option"), ~options)->expect->toBeInTheDocument
+  example
+  ->getByRole(~matcher=#Str("option"), ~options)
+  ->expect
+  ->toBeInTheDocument
 })
 
 test("renders red option (using regular expression)", () => {
@@ -69,13 +72,19 @@ test("renders red option (using regular expression)", () => {
     (),
   )
 
-  example->getByRole(~matcher=#Str("option"), ~options)->expect->toBeInTheDocument
+  example
+  ->getByRole(~matcher=#Str("option"), ~options)
+  ->expect
+  ->toBeInTheDocument
 })
 
 test("renders blue option (using custom function)", () => {
   let options = makeByRoleOptionsWithFunction(~name=(content, _element) => content === "Blue", ())
 
-  example->getByRole(~matcher=#Str("option"), ~options)->expect->toBeInTheDocument
+  example
+  ->getByRole(~matcher=#Str("option"), ~options)
+  ->expect
+  ->toBeInTheDocument
 })
 ```
 
