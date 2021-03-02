@@ -37,3 +37,44 @@ external findByTestId: (
   ~options: option<byTestIdOptions>,
 ) => Js.Promise.t<'element> = "findByTestId"
 let findByTestId = (~options=?, ~matcher, element) => findByTestId(element, ~matcher, ~options)
+
+@module("@testing-library/dom")
+external getAllByTestId: (
+  'element,
+  ~matcher: @unwrap
+  [
+    | #Func(textMatcher)
+    | #RegExp(Js.Re.t)
+    | #Str(string)
+  ],
+  ~options: option<byTestIdOptions>,
+) => array<'element> = "getAllByTestId"
+let getAllByTestId = (~options=?, ~matcher, element) => getAllByTestId(element, ~matcher, ~options)
+
+@module("@testing-library/dom")
+external queryAllByTestId: (
+  'element,
+  ~matcher: @unwrap
+  [
+    | #Func(textMatcher)
+    | #RegExp(Js.Re.t)
+    | #Str(string)
+  ],
+  ~options: option<byTestIdOptions>,
+) => array<'element> = "queryAllByTestId"
+let queryAllByTestId = (~options=?, ~matcher, element) =>
+  queryAllByTestId(element, ~matcher, ~options)
+
+@module("@testing-library/dom")
+external findAllByTestId: (
+  'element,
+  ~matcher: @unwrap
+  [
+    | #Func(textMatcher)
+    | #RegExp(Js.Re.t)
+    | #Str(string)
+  ],
+  ~options: option<byTestIdOptions>,
+) => Js.Promise.t<array<'element>> = "findAllByTestId"
+let findAllByTestId = (~options=?, ~matcher, element) =>
+  findAllByTestId(element, ~matcher, ~options)

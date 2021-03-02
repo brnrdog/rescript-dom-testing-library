@@ -216,6 +216,30 @@ test("getByTestId", () => {
   ->toBeInTheDocument
 })
 
+test("getAllByTestId", () => {
+  "<select>
+    <option role=\"option\" data-testid=\"option\">Color Red</option>
+    <option role=\"option\" data-testid=\"option\">Color Green</option>
+    <option role=\"option\" data-testid=\"option\">Color Blue</option>
+  </select>"
+  ->render
+  ->getAllByTestId(~matcher=#RegExp(Js.Re.fromString("option")))
+  |> Expect.expect
+  |> Expect.toHaveLength(3)
+})
+
+test("queryAllByTestId", () => {
+  "<select>
+    <option role=\"option\" data-testid=\"option\">Color Red</option>
+    <option role=\"option\" data-testid=\"option\">Color Green</option>
+    <option role=\"option\" data-testid=\"option\">Color Blue</option>
+  </select>"
+  ->render
+  ->queryAllByTestId(~matcher=#RegExp(Js.Re.fromString("option")))
+  |> Expect.expect
+  |> Expect.toHaveLength(3)
+})
+
 test("getByTestId (with exact as false)", () => {
   "<div data-testid=\"TEST-ID\">Test ID</div>"
   ->render
@@ -254,6 +278,17 @@ testPromise("findAllByRole", () => {
   </select>"
   ->render
   ->findAllByRole(~matcher=#Str("option"))
+  ->Promise.then_(el => el |> Expect.expect |> Expect.toHaveLength(3) |> Js_promise.resolve)
+})
+
+testPromise("findAllByTestId", () => {
+  "<select>
+    <option data-testid=\"opt\">Color Red</option>
+    <option data-testid=\"opt\">Color Green</option>
+    <option data-testid=\"opt\">Color Blue</option>
+  </select>"
+  ->render
+  ->findAllByTestId(~matcher=#Str("opt"))
   ->Promise.then_(el => el |> Expect.expect |> Expect.toHaveLength(3) |> Js_promise.resolve)
 })
 
