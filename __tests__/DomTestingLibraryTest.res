@@ -180,7 +180,7 @@ describe("byRole", () => {
   })
 })
 
-describe("byPlaceholder", () => {
+describe("byPlaceholderText", () => {
   test("getByPlaceholderText", () => {
     "<input type=\"text\" placeholder=\"title\" />"
     ->render
@@ -205,6 +205,29 @@ describe("byPlaceholder", () => {
     ->render
     ->findByPlaceholderText(~matcher=#Str("title"))
     ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
+  })
+
+  test("getAllByPlaceholderText", () => {
+    "<input type=\"text\" placeholder=\"title\" />"
+    ->render
+    ->getAllByPlaceholderText(~matcher=#Str("title"))
+    |> Expect.expect
+    |> Expect.toHaveLength(1)
+  })
+
+  test("getAllByPlaceholderText", () => {
+    "<input type=\"text\" placeholder=\"title\" />"
+    ->render
+    ->getAllByPlaceholderText(~matcher=#Str("title"))
+    |> Expect.expect
+    |> Expect.toHaveLength(1)
+  })
+
+  testPromise("findByPlaceholderText", () => {
+    "<input type=\"text\" placeholder=\"title\" />"
+    ->render
+    ->findAllByPlaceholderText(~matcher=#Str("title"))
+    ->Promise.then_(el => el |> Expect.expect |> Expect.toHaveLength(1) |> Js_promise.resolve)
   })
 })
 
