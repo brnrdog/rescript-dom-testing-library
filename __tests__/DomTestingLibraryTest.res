@@ -215,10 +215,10 @@ describe("byPlaceholderText", () => {
     |> Expect.toHaveLength(1)
   })
 
-  test("getAllByPlaceholderText", () => {
+  test("queryAllByPlaceholderText", () => {
     "<input type=\"text\" placeholder=\"title\" />"
     ->render
-    ->getAllByPlaceholderText(~matcher=#Str("title"))
+    ->queryAllByPlaceholderText(~matcher=#Str("title"))
     |> Expect.expect
     |> Expect.toHaveLength(1)
   })
