@@ -85,6 +85,18 @@ describe("byText", () => {
     |> Expect.toHaveLength(3)
   })
 
+  test("queryAllByText", () => {
+    "<select>
+    <option role=\"option\">Color Red</option>
+    <option role=\"option\">Color Green</option>
+    <option role=\"option\">Color Blue</option>
+  </select>"
+    ->render
+    ->queryAllByText(~matcher=#RegExp(Js.Re.fromString("Color")))
+    |> Expect.expect
+    |> Expect.toHaveLength(3)
+  })
+
   testPromise("findAllByText", () => {
     "<select>
     <option role=\"option\">Color Red</option>
