@@ -254,6 +254,29 @@ describe("byDisplayValue", () => {
     ->findByDisplayValue(~matcher=#Str("Red"))
     ->Promise.then_(el => el->expect->toBeInTheDocument->Js_promise.resolve)
   })
+
+  test("getAllByDisplayValue", () => {
+    "<input type=\"text\" placeholder=\"title\" value=\"Red\" />"
+    ->render
+    ->getAllByDisplayValue(~matcher=#Str("Red"))
+    |> Expect.expect
+    |> Expect.toHaveLength(1)
+  })
+
+  test("queryAllByDisplayValue", () => {
+    "<input type=\"text\" placeholder=\"title\" value=\"Red\" />"
+    ->render
+    ->queryAllByDisplayValue(~matcher=#Str("Red"))
+    |> Expect.expect
+    |> Expect.toHaveLength(1)
+  })
+
+  testPromise("findAllByDisplayValue", () => {
+    "<input type=\"text\" placeholder=\"title\" value=\"Red\" />"
+    ->render
+    ->findAllByDisplayValue(~matcher=#Str("Red"))
+    ->Promise.then_(el => el |> Expect.expect |> Expect.toHaveLength(1) |> Js_promise.resolve)
+  })
 })
 
 describe("byAltText", () => {
