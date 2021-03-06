@@ -439,3 +439,15 @@ testPromise("waitFor", () => {
     ->toBeInTheDocument
   )
 })
+
+test("prettyDOM", () => {
+  let element = "<select>
+    <option role=\"option\">Color Red</option>
+    <option role=\"option\">Color Green</option>
+    <options role=\"option\">Color Blue</option>
+  </select>"->render
+
+  debugScreen()
+
+  element->prettyDOM |> Expect.expect |> Expect.toMatchSnapshot
+})

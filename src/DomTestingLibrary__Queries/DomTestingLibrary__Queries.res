@@ -7,7 +7,3 @@ include DomTestingLibrary__Queries__ByTestId
 include DomTestingLibrary__Queries__ByText
 include DomTestingLibrary__Queries__ByTitle
 include DomTestingLibrary__Queries__Options
-
-@module("@testing-library/dom")
-external screen: 'document = "screen"
-let screen = screen
