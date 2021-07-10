@@ -10,12 +10,13 @@ let render = %raw(`
   }
 `)
 
+
 let renderWithDelay = %raw(`
-  function(html, delay) {
-    const body = document.querySelector('body')
-    setTimeout(() => {
-      body.innerHTML = html
-    }, delay)
+    function(html, delay) {
+      const body = document.querySelector('body');
+      setTimeout(() => {
+        body.innerHTML = html
+      }, delay)
     return body
   }
 `)
@@ -23,6 +24,37 @@ let renderWithDelay = %raw(`
 module Promise = {
   let then_ = (promise, fn) => Js.Promise.then_(fn, promise)
 }
+
+
+describe("UserEvent", () => {
+  let setupMocks = %raw(`
+    window.increment = () => {
+      window.count = window.count || 0;
+      return window.count++
+    }
+  `)
+
+  let resetMocks = () => %raw(`window.count = 0`)
+
+  beforeEach(() => {
+    setupMocks()
+  })
+
+  afterEach(() => {
+    resetMocks()
+  })
+  
+  test("click", () => {
+    `<button onclick="window.increment">Click me</button>`
+    ->render
+    ->getByRole(~matcher=#Str("button"), ~options=makeByRoleOptions(~name="Click me")())
+    ->UserEvent.click
+
+    let mockFnCalls = %raw("window.count")
+
+    mockFnCalls |> ExpectJs.expect |> ExpectJs.toEqual(1)
+  })
+})
 
 describe("byLabel", () => {
   test("getByLabel", () => {
