@@ -57,15 +57,15 @@ external getByRole: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-  ~options: @unwrap
+  ~options: Js.undefined<@unwrap
   [
     | #WithString(optionsWithString)
     | #WithRegExp(optionsWithRegExp)
     | #WithFunction(optionsWithFunction)
-  ],
+  ]>,
 ) => 'element = "getByRole"
-let getByRole = (~options, ~matcher, element) => {
-  getByRole(element, ~matcher, ~options)
+let getByRole = (~options=?, ~matcher, element) => {
+  getByRole(element, ~matcher, ~options=Js.Undefined.fromOption(options))
 }
 
 @module("@testing-library/dom")

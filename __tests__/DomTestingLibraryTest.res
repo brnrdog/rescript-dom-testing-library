@@ -10,7 +10,6 @@ let render = %raw(`
   }
 `)
 
-
 let renderWithDelay = %raw(`
     function(html, delay) {
       const body = document.querySelector('body');
@@ -24,7 +23,6 @@ let renderWithDelay = %raw(`
 module Promise = {
   let then_ = (promise, fn) => Js.Promise.then_(fn, promise)
 }
-
 
 describe("UserEvent", () => {
   let setupMocks = %raw(`
@@ -43,16 +41,20 @@ describe("UserEvent", () => {
   afterEach(() => {
     resetMocks()
   })
-  
+
   test("click", () => {
     `<button onclick="window.increment">Click me</button>`
     ->render
     ->getByRole(~matcher=#Str("button"), ~options=makeByRoleOptions(~name="Click me")())
     ->UserEvent.click
 
-    let mockFnCalls = %raw("window.count")
+    %raw("window.count") |> ExpectJs.expect |> ExpectJs.toEqual(1)
+  })
 
-    mockFnCalls |> ExpectJs.expect |> ExpectJs.toEqual(1)
+  test("type", () => {
+    let input = `<input type="text" onchange="window.increment" />`->render
+    input->getByRole(~matcher=#Str("textbox"))->UserEvent.type_("four")
+    input->getByDisplayValue(~matcher=#Str("four"))->expect->toBeInTheDocument
   })
 })
 
