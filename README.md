@@ -86,5 +86,6 @@ test("renders blue option (using custom function)", () => {
 })
 
 
-[See the tests](https://github.com/brnrdog/rescript-dom-testing-library/blob/master/__tests__/DomTestingLibraryTest.res) for more examples.
 ```
+
+[See the tests](https://github.com/brnrdog/rescript-dom-testing-library/blob/master/__tests__/DomTestingLibraryTest.res) for more examples.
