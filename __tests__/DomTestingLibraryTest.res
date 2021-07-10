@@ -52,9 +52,16 @@ describe("UserEvent", () => {
   })
 
   test("type", () => {
-    let input = `<input type="text" onchange="window.increment" />`->render
+    let input = `<input />`->render
     input->getByRole(~matcher=#Str("textbox"))->UserEvent.type_("four")
     input->getByDisplayValue(~matcher=#Str("four"))->expect->toBeInTheDocument
+  })
+
+  testPromise("keyboard", () => {
+    `<input />`->render->getByRole(~matcher=#Str("textbox"))->UserEvent.click
+    UserEvent.keyboard("four")
+
+    waitFor(() => screen->getByDisplayValue(~matcher=#Str("four"))->expect->toBeInTheDocument)
   })
 })
 
