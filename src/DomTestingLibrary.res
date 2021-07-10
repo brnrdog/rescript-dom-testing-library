@@ -19,3 +19,5 @@ let prettyDOM = (~maxLength=?, ~options=?, element) =>
 let debugScreen = () => None->prettyDOM->Js.log
 
 module UserEvent = DomTestingLibrary__UserEvent
+
+@val external screen: Dom.element = "document"
