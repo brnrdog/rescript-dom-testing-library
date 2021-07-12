@@ -17,31 +17,37 @@ type typeOptions = {
 
 type keyboardOptions = {delay: int}
 
-type userEvent = {
-  click: (. Dom.element, Js.undefined<clickOptions>, Js.undefined<eventInit>) => unit,
-  @as("type")
-  type_: (. Dom.element, string, Js.undefined<typeOptions>) => unit,
-  keyboard: (. string, Js.undefined<keyboardOptions>) => unit,
-}
+// type userEvent = {
+//   click: (. Dom.element, Js.undefined<clickOptions>, Js.undefined<eventInit>) => unit,
+//   @as("type")
+//   type_: (. Dom.element, string, Js.undefined<typeOptions>) => unit,
+//   keyboard: (. string, Js.undefined<keyboardOptions>) => unit,
+// }
 
 @module("@testing-library/user-event")
-external userEvent: userEvent = "default"
+external userEvent: t = "default"
 
+@send
+external _click: (t, 'element, Js.undefined<clickOptions>, Js.undefined<eventInit>) => unit =
+  "click"
+@send
 let click = (~options=?, ~init=?, element) => {
   let options = options->Js.Undefined.fromOption
   let init = init->Js.Undefined.fromOption
 
-  userEvent.click(. element, options, init)
+  _click(userEvent, element, options, init)
 }
 
+@send external _type: (t, 'element, string, Js.undefined<typeOptions>) => unit = "type"
 let type_ = (~options=?, element, text) => {
   let options = options->Js.Undefined.fromOption
 
-  userEvent.type_(. element, text, options)
+  _type(userEvent, element, text, options)
 }
 
+@send external _keyboard: (t, string, Js.undefined<keyboardOptions>) => unit = "keyboard"
 let keyboard = (~options=?, text) => {
   let options = options->Js.Undefined.fromOption
 
-  userEvent.keyboard(. text, options)
+  _keyboard(userEvent, text, options)
 }
