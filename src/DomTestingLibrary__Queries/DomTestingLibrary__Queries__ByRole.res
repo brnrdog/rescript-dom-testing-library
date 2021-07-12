@@ -19,6 +19,7 @@ type optionsWithFunction = {
 }
 
 type byRoleOptions = [
+  | #NoOptions(unit)
   | #WithString(optionsWithString)
   | #WithRegExp(optionsWithRegExp)
   | #WithFunction(optionsWithFunction)
@@ -57,15 +58,18 @@ external getByRole: (
     | #RegExp(Js.Re.t)
     | #Str(string)
   ],
-  ~options: Js.undefined<@unwrap
+  @optional
+  ~options: @unwrap
   [
+    | #NoOptions(unit)
     | #WithString(optionsWithString)
     | #WithRegExp(optionsWithRegExp)
     | #WithFunction(optionsWithFunction)
-  ]>,
+  ],
 ) => 'element = "getByRole"
 let getByRole = (~options=?, ~matcher, element) => {
-  getByRole(element, ~matcher, ~options=Js.Undefined.fromOption(options))
+  let options = Belt.Option.getWithDefault(options, #NoOptions())
+  getByRole(element, ~matcher, ~options)
 }
 
 @module("@testing-library/dom")

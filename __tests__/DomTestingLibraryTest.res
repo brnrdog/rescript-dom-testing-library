@@ -45,7 +45,7 @@ describe("UserEvent", () => {
   test("click", () => {
     `<button onclick="window.increment">Click me</button>`
     ->render
-    ->getByRole(~matcher=#Str("button"), ~options=makeByRoleOptions(~name="Click me")())
+    ->getByRole(~matcher=#Str("button"), ~options=makeByRoleOptions(~name="Click me", ()))
     ->UserEvent.click
 
     %raw("window.count") |> ExpectJs.expect |> ExpectJs.toEqual(1)

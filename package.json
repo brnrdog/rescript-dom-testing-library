@@ -24,7 +24,7 @@
     "semantic-release": "^17.3.9"
   },
   "dependencies": {
-    "@testing-library/dom": "^7.29.4",
+    "@testing-library/dom": "^8.1.0",
     "@testing-library/user-event": "^13.1.9",
     "commitizen": "^4.2.3"
   }
