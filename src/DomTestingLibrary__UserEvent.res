@@ -9,20 +9,13 @@ type clickOptions = {
 
 type typeOptions = {
   delay: int,
-  // skipClick: bool,
-  // skipAutoClose: bool,
-  // initialSelectionStart: int,
-  // initialSelectionEnd: int,
+  skipClick: bool,
+  skipAutoClose: bool,
+  initialSelectionStart: int,
+  initialSelectionEnd: int,
 }
 
 type keyboardOptions = {delay: int}
-
-// type userEvent = {
-//   click: (. Dom.element, Js.undefined<clickOptions>, Js.undefined<eventInit>) => unit,
-//   @as("type")
-//   type_: (. Dom.element, string, Js.undefined<typeOptions>) => unit,
-//   keyboard: (. string, Js.undefined<keyboardOptions>) => unit,
-// }
 
 @module("@testing-library/user-event")
 external userEvent: t = "default"
