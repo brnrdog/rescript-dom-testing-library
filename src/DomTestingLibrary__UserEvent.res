@@ -44,3 +44,14 @@ let keyboard = (~options=?, text) => {
 
   _keyboard(userEvent, text, options)
 }
+
+type tabOptions = {
+  shift: bool,
+  focusTrab: Dom.element,
+}
+
+@send external _tab: (t, Js.undefined<tabOptions>) => unit = "tab"
+let tab = (~options=?, ()) => {
+  let options = options->Js.Undefined.fromOption
+  _tab(userEvent, options)
+}

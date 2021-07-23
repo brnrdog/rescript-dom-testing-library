@@ -1,5 +1,7 @@
 include DomTestingLibrary__Queries
 
+module UserEvent = DomTestingLibrary__UserEvent
+
 @module("@testing-library/dom")
 external waitFor: (unit => 'element) => Js.Promise.t<'element> = "waitFor"
 
@@ -17,7 +19,5 @@ let prettyDOM = (~maxLength=?, ~options=?, element) =>
   )
 
 let debugScreen = () => None->prettyDOM->Js.log
-
-module UserEvent = DomTestingLibrary__UserEvent
 
 @val external screen: Dom.element = "document"

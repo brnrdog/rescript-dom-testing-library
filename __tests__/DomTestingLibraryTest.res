@@ -24,47 +24,6 @@ module Promise = {
   let then_ = (promise, fn) => Js.Promise.then_(fn, promise)
 }
 
-describe("UserEvent", () => {
-  let setupMocks = %raw(`
-    window.increment = () => {
-      window.count = window.count || 0;
-      return window.count++
-    }
-  `)
-
-  let resetMocks = () => %raw(`window.count = 0`)
-
-  beforeEach(() => {
-    setupMocks()
-  })
-
-  afterEach(() => {
-    resetMocks()
-  })
-
-  test("click", () => {
-    `<button onclick="window.increment">Click me</button>`
-    ->render
-    ->getByRole(~matcher=#Str("button"), ~options=makeByRoleOptions(~name="Click me", ()))
-    ->UserEvent.click
-
-    %raw("window.count") |> ExpectJs.expect |> ExpectJs.toEqual(1)
-  })
-
-  test("type", () => {
-    let input = `<input />`->render
-    input->getByRole(~matcher=#Str("textbox"))->UserEvent.type_("four")
-    input->getByDisplayValue(~matcher=#Str("four"))->expect->toBeInTheDocument
-  })
-
-  testPromise("keyboard", () => {
-    `<input />`->render->getByRole(~matcher=#Str("textbox"))->UserEvent.click
-    UserEvent.keyboard("four")
-
-    waitFor(() => screen->getByDisplayValue(~matcher=#Str("four"))->expect->toBeInTheDocument)
-  })
-})
-
 describe("byLabel", () => {
   test("getByLabel", () => {
     "<label for=\"title\">Title</label><input type=\"text\" id=\"title\" />"

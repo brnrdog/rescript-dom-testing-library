@@ -19,6 +19,7 @@
   "license": "MIT",
   "devDependencies": {
     "@glennsl/bs-jest": "^0.6.0",
+    "@rescript/react": "^0.10.3",
     "bs-jest-dom": "^4.1.1",
     "commitizen": "^4.2.3",
     "rescript": "^9.1.3",
