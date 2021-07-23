@@ -51,16 +51,26 @@ describe("UserEvent", () => {
   })
 
   test("tab", () => {
-    let html = `<button>Save</button>`->render
+    let html = `<button>Save</button><button>Cancel</button>`->render
 
-    let cancel =
+    let save =
       html->DomTestingLibrary.getByRole(
         ~matcher=#Str("button"),
         ~options=makeByRoleOptions(~name="Save", ()),
       )
 
-    let activeElement = %raw(`document.activeElement`)
+    let cancel =
+      html->DomTestingLibrary.getByRole(
+        ~matcher=#Str("button"),
+        ~options=makeByRoleOptions(~name="Cancel", ()),
+      )
 
+    let activeElement = %raw(`document.activeElement`)
+    save->expect->Expect.toBe(activeElement)->(_ => ())
+
+    UserEvent.tab()
+
+    let activeElement = %raw(`document.activeElement`)
     cancel->expect->Expect.toBe(activeElement)
   })
 })
